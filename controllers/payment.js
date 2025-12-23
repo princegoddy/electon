@@ -92,7 +92,7 @@ const verifypayment = async (req, res) => {
     }
 
     const response = await axios.get(
-      `https://api.paystack.co/transaction/verify/${reference}`,
+      `https://api.paystack.co/transaction/verify/{reference}`,
       {
         headers: {
           Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
@@ -119,7 +119,9 @@ const verifypayment = async (req, res) => {
         { account: user._id, checkedout: false },
         { $set: { checkedout: true } }
       );
-      return res.redirect("/checkout?message= payment verification  successful");
+      return res.redirect(
+        "/checkout?message= payment verification  successful"
+      );
     } else {
       console.log("Error");
       console.log(response.data);
